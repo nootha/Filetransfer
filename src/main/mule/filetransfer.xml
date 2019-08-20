@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:sftp="http://www.mulesoft.org/schema/mule/sftp" xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/sftp http://www.mulesoft.org/schema/mule/sftp/current/mule-sftp.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="8960150d-8506-4ea6-86d3-f612e636fb22" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="filetransferFlow" doc:id="bedb427d-be44-48e2-b0a4-13711830e0e7" >
+		<http:listener doc:name="Listener" doc:id="0479b135-a249-4d7f-b826-1deb3fd4ba7c" config-ref="HTTP_Listener_config" path="/file" allowedMethods="GET"/>
+		<file:move doc:name="Move" doc:id="4426f43c-2d1a-4712-9234-1d924a64abb9" sourcePath="C:\Users\Mahendar\Desktop\Mulesoft\Example\source" targetPath="C:\Users\Mahendar\Desktop\Mulesoft\Example\destination"/>
+		<logger level="INFO" doc:name="Logger" doc:id="c7aa7718-99e6-4203-929a-a5fbf4ae8e99" message="#[payload]"/>
+	</flow>
+</mule>
